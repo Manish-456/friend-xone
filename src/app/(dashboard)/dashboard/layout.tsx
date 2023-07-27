@@ -111,5 +111,5 @@ export default async function DashboardLayout({
         {children}
         </aside>
     </div>
-  );
+  )
 }
