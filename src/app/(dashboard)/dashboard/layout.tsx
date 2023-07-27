@@ -107,7 +107,7 @@ export default async function DashboardLayout({
         </nav>
       </div>
 
-      <aside className="max-h-screen container pt-12 md:pt-0  w-full">
+      <aside className="max-h-screen px-0 md:container pt-12 md:pt-0  w-full">
         {children}
         </aside>
     </div>
