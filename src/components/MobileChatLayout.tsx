@@ -37,7 +37,7 @@ const MobileChatLayout: FC<MobileChatLayoutProps> = ({ friends, session, sidebar
         <Link
           href='/dashboard'
         >
-          <SendHorizonal className='h-8 w-auto fill-blue-400  rotate-[270deg]' />
+          <SendHorizonal className='h-8 w-auto fill-blue-400 text-white rotate-[270deg]' />
         </Link>
         <Button onClick={() => setOpen(true)} className='gap-4'>
            <Menu className='h-6 w-6' />
