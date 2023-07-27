@@ -28,7 +28,7 @@ export default function FriendSidebarOptions({initialUnseenRequestCount, session
          setUnseenRequestCount(prev => prev - 1);
        }
        pusherClient.bind('incoming_friend_requests', friendRequestsCount);
-       pusherClient.bind('new_friend', addedFriendHandler);
+       pusherClient.bind('new_friends', addedFriendHandler);
 
      
        return () => {
