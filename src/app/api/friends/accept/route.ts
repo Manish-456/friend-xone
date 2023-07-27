@@ -31,18 +31,18 @@ export async function POST(req : Request){
         fetchRedis('get', `user:${idToAdd}`),
       ]) as [string, string];
 
-      const user = JSON.parse(userRaw) as string;
-      const friend = JSON.parse(friendRaw) as string;
+      const user = JSON.parse(userRaw) as User;
+      const friend = JSON.parse(friendRaw) as User;
 
          await Promise.all([
-         pusherServer.trigger(toPusherKey(`user:${idToAdd}:friends`), 'new_friends', user),
-         pusherServer.trigger(toPusherKey(`user:${session.user.id}:friends`), 'new_friends', friend),
+         await pusherServer.trigger(toPusherKey(`user:${idToAdd}:friends`), 'new_friends', user),
+         await pusherServer.trigger(toPusherKey(`user:${session.user.id}:friends`), 'new_friends', friend),
              
-                     db.sadd(`user:${session.user.id}:friends`, idToAdd),
+                    await  db.sadd(`user:${session.user.id}:friends`, idToAdd),
              
-                     db.sadd(`user:${idToAdd}:friends`, session.user.id),
+                    await  db.sadd(`user:${idToAdd}:friends`, session.user.id),
              
-                     db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd),
+                    await  db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd),
 
          ])
         return new Response('OK')
