@@ -21,7 +21,7 @@ export default function SidebarChatList({ friends, sessionId }: Props) {
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
   const router = useRouter();
   const pathname = usePathname();
-  const [activeChats, setActiveChats] = useState<User[]>([]);
+  const [activeChats, setActiveChats] = useState<User[]>(friends);
 
   useEffect(() => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`));
