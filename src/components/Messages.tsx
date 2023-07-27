@@ -24,7 +24,7 @@ export default function Messages({
 }: Props) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const scrollDownRef = useRef<HTMLDivElement | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
+
   const formatter = (timestamp: number) => {
     return format(timestamp, "HH:mm");
   };
@@ -32,7 +32,7 @@ export default function Messages({
 
 
   useEffect(() => {
-    setIsMounted(true);
+
     pusherClient.subscribe(toPusherKey(`chat:${chatId}`));
     
     const messageHandler = (message: Message) => {
@@ -48,7 +48,7 @@ export default function Messages({
    }
  }, [chatId])
 
- if(!isMounted) return null;
+
 
   return (
     <div
