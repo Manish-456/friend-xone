@@ -34,7 +34,7 @@ export default async function DashboardPage() {
   );
 
   return (
-    <div className="md:container px-0 py-12">
+    <div className="md:container px-2 py-12">
       <h1 className="font-bold text-5xl mb-8">Recent Chats</h1>
       {friendsWithLastMessage.length === 0 ? (
         <p className="text-sm text-zinc-500">Nothing to show here.</p>
