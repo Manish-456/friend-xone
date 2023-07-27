@@ -18,15 +18,26 @@ export default function FriendSidebarOptions({initialUnseenRequestCount, session
     useEffect(() => {
     
         pusherClient.subscribe(toPusherKey(`user:${sessionId}:incoming_friend_requests`));
-        
+        pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`))
+
         const friendRequestsCount = () => {
            setUnseenRequestCount(prev => prev + 1);
        }
+
+       const addedFriendHandler = () => {
+         setUnseenRequestCount(prev => prev - 1);
+       }
        pusherClient.bind('incoming_friend_requests', friendRequestsCount);
+       pusherClient.bind('new_friend', addedFriendHandler);
+
      
        return () => {
          pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:incoming_friend_requests`));
          pusherClient.unbind('incoming_friend_requests', friendRequestsCount);
+         pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:friends`))
+         pusherClient.unbind('new_friend', addedFriendHandler);
+
+
    
        }
      }, [sessionId])

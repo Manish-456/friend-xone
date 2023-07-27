@@ -27,12 +27,11 @@ const FriendRequests = ({incomingFriendRequests, sessionId} : FriendRequestProps
    useEffect(() => {
      setIsMounted(true);
      pusherClient.subscribe(toPusherKey(`user:${sessionId}:incoming_friend_requests`));
-     
      const friendRequestHandler = ({senderId, senderEmail} : IncomingFriendRequest) => {
         setFriendRequests(prev => [...prev, {senderEmail, senderId}])
     }
+    
     pusherClient.bind('incoming_friend_requests', friendRequestHandler);
-  
     return () => {
       pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:incoming_friend_requests`));
       pusherClient.unbind('incoming_friend_requests', friendRequestHandler);
